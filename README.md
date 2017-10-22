@@ -25,7 +25,7 @@ GGMRESTFul는 **GGMContext에 의존적이지 않으며** GGMBot에서 사용될
 
 아래의 예제는 [JSONPlaceholder](https://jsonplaceholder.typicode.com/) 서버를 이용한 예제입니다.
 반환되는 JSON데이터를 저장받을 모델 클래스를 정의합니다.
-<pre><code class='language-cs'>
+```cs
 public class TestPost
 {
     public int Id { get; set; }
@@ -44,12 +44,11 @@ public class TestPost
         return string.Concat("UserID : ", Id, ", Title : ", Title, ", Body", Body);
     }
 }
-</code></pre>
+```
 
 
  API를 호출할 Service 인터페이스를 선언합니다. 모든 메소드에는 HTTPMethodAttribute가 반드시 지정되어 있어야 합니다.
-<pre><code class='language-cs'>
-public void Main()
+```cs
 public interface ITestService
 {
     [GET("posts/{id}")] // 메소드의 파라메터 중 [Path] Attribute 을 이용하면 동적으로 api 을 정할 수 있습니다.
@@ -72,12 +71,12 @@ public interface ITestService
     TestPost DeletePost([Path("id")] int postId);
 
 }
-</code></pre>
+```
 
 Service생성을 위해, 우선 Factory객체를 생성합니다. SetDefaultHeaders를 이용하여 기본적인 헤더들을 미리 정해 놓을 수 있습니다.
 생성된 service를 이용하여 RESTFul클라이언트를 테스트 해 볼 수 있습니다.
 
-<pre><code class='language-cs'>
+```cs
 public static void Main(string[] args)
 {
     Factory factory = new Factory("https://jsonplaceholder.typicode.com/");
@@ -89,7 +88,7 @@ public static void Main(string[] args)
     Console.WriteLine(testService.DeletePost(1).ToString() + "\n");
 
 }
-</code></pre>
+```
 
 ## 추후 구현 기능 및 예정
 * 추상화된 JsonConverter, RequestBuilder를 구현 (사용자가 다른 Json라이브러리나 Request을 이용할 수 있게끔
